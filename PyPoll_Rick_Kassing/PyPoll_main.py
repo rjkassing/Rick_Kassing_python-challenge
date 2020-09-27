@@ -2,10 +2,11 @@ import os
 import csv
 
 # Path to collect data from the Resources folder
-wrestling_csv = os.path.join('..', 'Resources', 'WWE-Data-2016.csv')
+election_data_csv = os.path.join("/Desktop/Rick_GT_Classwork/Cloned_Repos/Rick_Kassing_python-challenge/PyPoll_Rick_Kassing")
 
 
-# Define the function and have it accept the 'wrestler_data' as its sole parameter
+
+# Define the function and have it accept the 'election_data' as its sole parameter
 def print_percentages(wrestler_data):
     # For readability, it can help to assign your values to variables with descriptive names
     name = str(wrestler_data[0])
