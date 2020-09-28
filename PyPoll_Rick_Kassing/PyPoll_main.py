@@ -2,20 +2,26 @@ import os
 import csv
 
 # Path to collect data from the Resources folder
-election_data_csv = os.path.join("/Desktop/Rick_GT_Classwork/Cloned_Repos/Rick_Kassing_python-challenge/PyPoll_Rick_Kassing")
+election_data = os.path.join('.', 'Resources', 'election_data')
+
+csvreader = csv.reader(csvfile.delimiter)
+
+# List of candidates
+list1 = [ 'Correy', 'Khan', 'Li', 'OTooley']
+
+# Count votes per candidate
+Correy_count = list1.count('Correy')
+Khan_count = list1.count('Khan')
+Li_count = list1.count ('Li')
+OTooley_count = list1.count ('OTooley')
+
+    df.head()
+
+        df['Voter ID'].value_counts()
 
 
-
-# Define the function and have it accept the 'election_data' as its sole parameter
-def print_percentages(wrestler_data):
-    # For readability, it can help to assign your values to variables with descriptive names
-    name = str(wrestler_data[0])
-    wins = int(wrestler_data[1])
-    losses = int(wrestler_data[2])
-    draws = int(wrestler_data[3])
-
-    # Total matches can be found by adding wins, losses, and draws together
-    total_matches = wins + losses + draws
+    # Total Total Number of Votes
+    Vote_Count = 
 
     # Win percent can be found by dividing the the total wins by the total matches and multiplying by 100
     win_percent = (wins / total_matches) * 100
