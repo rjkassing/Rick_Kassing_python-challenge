@@ -2,64 +2,49 @@ import os
 import csv
 
 # Path to collect data from the Resources folder
-election_data = os.path.join('.', 'Resources', 'election_data')
-
-csvreader = csv.reader(csvfile.delimiter)
-
-# List of candidates
-list1 = [ 'Correy', 'Khan', 'Li', 'OTooley']
-
-# Count votes per candidate
-Correy_count = list1.count('Correy')
-Khan_count = list1.count('Khan')
-Li_count = list1.count ('Li')
-OTooley_count = list1.count ('OTooley')
-
-    df.head()
-
-        df['Voter ID'].value_counts()
-
-
-    # Total Total Number of Votes
-    Vote_Count = 
-
-    # Win percent can be found by dividing the the total wins by the total matches and multiplying by 100
-    win_percent = (wins / total_matches) * 100
-
-    # Loss percent can be found by dividing the total losses by the total matches and multiplying by 100
-    loss_percent = (losses / total_matches) * 100
-
-    # Draw percent can be found by dividing the total draws by the total matches and multiplying by 100
-    draw_percent = (draws / total_matches) * 100
-
-    # If the loss percentage is over 50, type_of_wrestler is "Jobber". Otherwise it is "Superstar".
-    if loss_percent > 50:
-        type_of_wrestler = "Jobber"
-    else:
-        type_of_wrestler = "Superstar"
-
-    # Print out the wrestler's name and their percentage stats
-    print(f"Stats for {name}")
-    print(f"WIN PERCENT: {str(win_percent)}")
-    print(f"LOSS PERCENT: {str(loss_percent)}")
-    print(f"DRAW PERCENT: {str(draw_percent)}")
-    print(f"{name} is a {type_of_wrestler}")
-
+election_data = os.path.join('PyPoll_Resources', 'election_data.csv')
 
 # Read in the CSV file
-with open(wrestling_csv, 'r') as csvfile:
+with open(election_data, 'r') as csvfile:
 
-    # Split the data on commas
-    csvreader = csv.reader(csvfile, delimiter=',')
+    csvreader = csv.reader(csvfile)
 
     header = next(csvreader)
 
-    # Prompt the user for what wrestler they would like to search for
-    name_to_check = input("What wrestler do you want to look for? ")
+    
+    total_votes=0
 
-    # Loop through the data
+    # Create a dictionary to hold the candidates names.
+    candidates = {}
+
+    list2 = []
+# Create a dictionary using the built-in function.
+    candidates = dict()
+
+    # Total Number of Votes Cast
     for row in csvreader:
+        total_votes=total_votes+1
+        if row[2] not in list2:
+            list2.append(row[2])
+            candidates[row[2]] = 0
+        candidates[row[2]] = candidates[row[2]]+1
 
-        # If the wrestler's name in a row is equal to that which the user input, run the 'print_percentages()' function
-        if name_to_check == row[0]:
-            print_percentages(row)
+    print(f"Election Results")
+    print(f"-------------------------")
+    print(f"Total Votes: {(total_votes)}")
+    print(f"-------------------------")
+    print(f"({candidates)})"
+
+
+    # # Set variable for output file
+    # Final_Results = os.path.join("Final_Results.csv")
+
+    # #  Open the output file
+    # with open(Final_Results, "w") as datafile:
+    #     writer = csv.writer(datafile)
+
+    #     # Write the lines
+    #     datafile.write("Election Results" + "\n")
+    #     datafile.write("-------------------------" + "\n")
+    #     datafile.write("Total Votes" + str(total_votes) + "\n")
+    #     datafile.write("-------------------------" + "\n")

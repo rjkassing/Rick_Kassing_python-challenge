@@ -2,57 +2,63 @@ import os
 import csv
 
 # Path to collect data from the Resources folder
-wrestling_csv = os.path.join('..', 'Resources', 'WWE-Data-2016.csv')
-
-
-# Define the function and have it accept the 'wrestler_data' as its sole parameter
-def print_percentages(wrestler_data):
-    # For readability, it can help to assign your values to variables with descriptive names
-    name = str(wrestler_data[0])
-    wins = int(wrestler_data[1])
-    losses = int(wrestler_data[2])
-    draws = int(wrestler_data[3])
-
-    # Total matches can be found by adding wins, losses, and draws together
-    total_matches = wins + losses + draws
-
-    # Win percent can be found by dividing the the total wins by the total matches and multiplying by 100
-    win_percent = (wins / total_matches) * 100
-
-    # Loss percent can be found by dividing the total losses by the total matches and multiplying by 100
-    loss_percent = (losses / total_matches) * 100
-
-    # Draw percent can be found by dividing the total draws by the total matches and multiplying by 100
-    draw_percent = (draws / total_matches) * 100
-
-    # If the loss percentage is over 50, type_of_wrestler is "Jobber". Otherwise it is "Superstar".
-    if loss_percent > 50:
-        type_of_wrestler = "Jobber"
-    else:
-        type_of_wrestler = "Superstar"
-
-    # Print out the wrestler's name and their percentage stats
-    print(f"Stats for {name}")
-    print(f"WIN PERCENT: {str(win_percent)}")
-    print(f"LOSS PERCENT: {str(loss_percent)}")
-    print(f"DRAW PERCENT: {str(draw_percent)}")
-    print(f"{name} is a {type_of_wrestler}")
+budget_data = os.path.join('PyBank_Resources', 'budget_data.csv')
 
 
 # Read in the CSV file
-with open(wrestling_csv, 'r') as csvfile:
+with open(budget_data, 'r') as csvfile:
 
-    # Split the data on commas
-    csvreader = csv.reader(csvfile, delimiter=',')
+    csvreader = csv.reader(csvfile)
 
     header = next(csvreader)
 
-    # Prompt the user for what wrestler they would like to search for
-    name_to_check = input("What wrestler do you want to look for? ")
+    total_months=[]
+    total_dollars=[]
+    profit=[]
+    profit_change_list=[]
+    total_profit=[]
+    average_change=[]
+    greatest_increase=[]
+    greatest_decrease=[]
+    # Calculate "profit" column
 
-    # Loop through the data
     for row in csvreader:
+    # Sum for number of months and total $
+        total_dollars.append(int(row[1]))
+        total_months.append(row[0])        
 
-        # If the wrestler's name in a row is equal to that which the user input, run the 'print_percentages()' function
-        if name_to_check == row[0]:
-            print_percentages(row)
+        # Calculate the monthly changes
+        i=0
+        for i in range ((len(profit)-1)):        
+        
+            profit_change=int(profit[i])-int(profit[i-1])
+            profit_change_list.append(profit_change)
+    # Calaculate the total profit for the average calc
+            total_profit = sum(profit_change_list)
+    # Calaculate the average profit Chg
+            average_change = (sum(total_profit))/len(total_months)
+
+     # Calculate greatest_increase 
+            greatest_increase=max(profit_change)
+            greatest_increase_month= profit_change.index(greatest_increase)
+
+            # Calculate greatest_decrease   
+            greatest_decrease= min(profit_change)
+            greatest_decrease_month= profit_change.index(greatest_decrease)
+
+# Print Statements
+    print(f"Financial Analysis")
+    print (f"---------------------")
+    print(f"Total months: {len(total_months)}")
+    print(f"Total $: {sum(total_dollars)}")
+    print(f"Average Change : {(total_profit)}")
+    print(f"Greatest Increase in Profits: {greatest_increase_month} (${(greatest_increase)})")
+    print(f"Greatest Decrease in Profits: {greatest_decrease_month} (${(greatest_decrease)})")
+
+    datafile.write("Financial Analysis" + "\n")
+    datafile.write("---------------------------" + "\n")
+    datafile.write(f"Total Months: {(total_month)}" + "\n")
+    datafile.write(f"Total: ${(total)}" + "\n")
+    datafile.write(f"Average Change: ${round(average_change),2}" + "\n")
+    datafile.write(f"Great Increase in Profits: {greatest_increase_month} (${(greatest_increase)})" + "\n")
+    datafile.write(f"Great Decrease in Profits: {greatest_decrease_month} (${(greatest_decrease)})" + "\n")
