@@ -16,7 +16,8 @@ with open(election_data, 'r') as csvfile:
 
     # Create a dictionary to hold the candidates names.
     candidates = {}
-
+    max_votes = 0
+    winner = {}
     list2 = []
 # Create a dictionary using the built-in function.
     candidates = dict()
@@ -29,22 +30,30 @@ with open(election_data, 'r') as csvfile:
             candidates[row[2]] = 0
         candidates[row[2]] = candidates[row[2]]+1
 
-    print(f"Election Results")
-    print(f"-------------------------")
-    print(f"Total Votes: {(total_votes)}")
-    print(f"-------------------------")
-    print(f"({candidates)})"
+        percent_dict = {}
+    for x in candidate_dict:
+        percent_dict[x] = round((candidate_dict[x] / total_votes) * 100, 2)
+        votes = candidate_dict.get(x)
+        if votes > max_votes:
+             max_votes = votes
+             winner = x
+output = f"{x} : {percent_dict[x]}% , {votes} \n "
+print(f"Election Results")
+print(f"-------------------------")
+print(f"Total Votes: {(total_votes)}")
+print(f"-------------------------")
+print(f"({candidates)})"
+print(f"Winner : {(winner)}")
 
+    # Set variable for output file
+    Final_Results = os.path.join("Final_Results.csv")
 
-    # # Set variable for output file
-    # Final_Results = os.path.join("Final_Results.csv")
+    #  Open the output file
+    with open(Final_Results, "w") as datafile:
+        writer = csv.writer(datafile)
 
-    # #  Open the output file
-    # with open(Final_Results, "w") as datafile:
-    #     writer = csv.writer(datafile)
-
-    #     # Write the lines
-    #     datafile.write("Election Results" + "\n")
-    #     datafile.write("-------------------------" + "\n")
-    #     datafile.write("Total Votes" + str(total_votes) + "\n")
-    #     datafile.write("-------------------------" + "\n")
+        # Write the lines
+        datafile.write("Election Results" + "\n")
+        datafile.write("-------------------------" + "\n")
+        datafile.write("Total Votes" + str(total_votes) + "\n")
+        datafile.write("-------------------------" + "\n")

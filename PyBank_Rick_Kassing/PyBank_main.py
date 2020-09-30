@@ -11,47 +11,48 @@ with open(budget_data, 'r') as csvfile:
     csvreader = csv.reader(csvfile)
 
     header = next(csvreader)
-
+    first_row = next(csvreader)
+    x = first_row[1]
     total_months=[]
     total_dollars=[]
     profit=[]
     profit_change_list=[]
     total_profit=[]
-    average_change=[]
     greatest_increase=[]
     greatest_decrease=[]
-    # Calculate "profit" column
+    prevous_profit= 0
+    i=1
+    total_months.append(int(x))
+    total_dollars.append(int(x)) 
 
     for row in csvreader:
     # Sum for number of months and total $
         total_dollars.append(int(row[1]))
         total_months.append(row[0])        
 
-        # Calculate the monthly changes
-        i=0
-        for i in range ((len(profit)-1)):        
-        
-            profit_change=int(profit[i])-int(profit[i-1])
-            profit_change_list.append(profit_change)
-    # Calaculate the total profit for the average calc
-            total_profit = sum(profit_change_list)
-    # Calaculate the average profit Chg
-            average_change = (sum(total_profit))/len(total_months)
+    # Find the "profit_change" for each month
+        profit_change = int(total_dollars[i]) - int(total_dollars[i-1])
+    
+        profit_change_list.append(int(profit_change))
+# Calaculate the total profit for the average calc
+        total_profit = sum(profit_change_list)
+# Calaculate the average profit Chg
+        average_change = (sum(profit_change_list))/len(total_months)
+        i+=1
+# Calculate greatest_increase 
+    greatest_increase=max(profit_change_list)
+    greatest_increase_month= total_months[profit_change_list.index(greatest_increase)+1]
 
-     # Calculate greatest_increase 
-            greatest_increase=max(profit_change)
-            greatest_increase_month= profit_change.index(greatest_increase)
-
-            # Calculate greatest_decrease   
-            greatest_decrease= min(profit_change)
-            greatest_decrease_month= profit_change.index(greatest_decrease)
-
-# Print Statements
+    # Calculate greatest_decrease   
+    greatest_decrease= min(profit_change_list)
+    greatest_decrease_month= total_months[profit_change_list.index(greatest_decrease)+1]
+    
+  # Print Statements  
     print(f"Financial Analysis")
     print (f"---------------------")
     print(f"Total months: {len(total_months)}")
     print(f"Total $: {sum(total_dollars)}")
-    print(f"Average Change : {(total_profit)}")
+    print(f"Average Change : {round(average_change,2)}")
     print(f"Greatest Increase in Profits: {greatest_increase_month} (${(greatest_increase)})")
     print(f"Greatest Decrease in Profits: {greatest_decrease_month} (${(greatest_decrease)})")
 
