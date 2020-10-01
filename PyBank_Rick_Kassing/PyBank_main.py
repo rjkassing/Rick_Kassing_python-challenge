@@ -49,17 +49,21 @@ with open(budget_data, 'r') as csvfile:
     
   # Print Statements  
     print(f"Financial Analysis")
-    print (f"---------------------")
-    print(f"Total months: {len(total_months)}")
+    print(f"---------------------")
+    print(f"Total Months: {len(total_months)}")
     print(f"Total $: {sum(total_dollars)}")
     print(f"Average Change : {round(average_change,2)}")
     print(f"Greatest Increase in Profits: {greatest_increase_month} (${(greatest_increase)})")
     print(f"Greatest Decrease in Profits: {greatest_decrease_month} (${(greatest_decrease)})")
 
-    datafile.write("Financial Analysis" + "\n")
-    datafile.write("---------------------------" + "\n")
-    datafile.write(f"Total Months: {(total_month)}" + "\n")
-    datafile.write(f"Total: ${(total)}" + "\n")
-    datafile.write(f"Average Change: ${round(average_change),2}" + "\n")
-    datafile.write(f"Great Increase in Profits: {greatest_increase_month} (${(greatest_increase)})" + "\n")
-    datafile.write(f"Great Decrease in Profits: {greatest_decrease_month} (${(greatest_decrease)})" + "\n")
+    # set write path
+    PyBank_Financial_Analysis = open('PyBank_Financial_Analysis.txt', 'w')
+    # write to txt
+    PyBank_Financial_Analysis.write(f"Financial Analysis" + "\n")
+    PyBank_Financial_Analysis.write("---------------------------" + "\n")
+    PyBank_Financial_Analysis.write("Total Months:{str(len(total_months))}" + "\n")
+    PyBank_Financial_Analysis.write("Total $: {sum(total_dollars)}" + "\n")
+    PyBank_Financial_Analysis.write("Average Change: ${round(average_change),2}" + "\n")
+    PyBank_Financial_Analysis.write("Great Increase in Profits: {greatest_increase_month} (${(greatest_increase)})" + "\n")
+    PyBank_Financial_Analysis.write("Great Decrease in Profits: {greatest_decrease_month} (${(greatest_decrease)})" + "\n")
+

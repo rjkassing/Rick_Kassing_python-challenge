@@ -43,17 +43,13 @@ print(f"-------------------------")
 print(f"Total Votes: {(total_votes)}")
 print(f"-------------------------")
 print(f"({candidates)})"
-print(f"Winner : {(winner)}")
+# print(f"Winner : {(winner)}")
 
-    # Set variable for output file
-    Final_Results = os.path.join("Final_Results.csv")
-
-    #  Open the output file
-    with open(Final_Results, "w") as datafile:
-        writer = csv.writer(datafile)
-
-        # Write the lines
-        datafile.write("Election Results" + "\n")
-        datafile.write("-------------------------" + "\n")
-        datafile.write("Total Votes" + str(total_votes) + "\n")
-        datafile.write("-------------------------" + "\n")
+#  Open the output file
+with open(Final_Results.csv, "w") as datafile:
+# Write the lines
+    writer = csv.writer(datafile)
+    writer.writerow("Election Results" + "\n")
+    writer.writerow("-------------------------" + "\n")
+    writer.writerow("Total Votes" + str(total_votes) + "\n")
+    writer.writerow("-------------------------" + "\n")

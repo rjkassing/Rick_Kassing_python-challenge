@@ -1,0 +1,7 @@
+Financial Analysis
+---------------------------
+Total Months:{str(len(total_months))}
+Total $: {sum(total_dollars)}
+Average Change: ${round(average_change),2}
+Great Increase in Profits: {greatest_increase_month} (${(greatest_increase)})
+Great Decrease in Profits: {greatest_decrease_month} (${(greatest_decrease)})
